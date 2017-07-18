@@ -1,0 +1,9 @@
+.navbar .user-profile {
+	padding: .6em;
+}
+
+.navbar .user-profile img {
+	height: 32px;
+	width: auto;
+	border-radius: 100%;
+}

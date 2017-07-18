@@ -1,0 +1,63 @@
+.history-ct.container[data-mode=Total] {
+	margin: auto;
+}
+
+.history_entries {
+	padding: 0;
+	list-style: none;
+	margin-top: 2em;
+}
+
+.history_entries li {
+	padding: .33em 1em;
+	margin-bottom: 1em;
+}
+
+.history_entries .user {
+	max-width: 64px;
+	padding: .5em 1em;
+	padding-right: 0;
+	margin-right: .5em;
+}
+
+.history_entries .user-avatar {
+	height: 36px;
+	width: 36px;
+	border-radius: 36px;
+}
+
+.history_entries .entry_description {
+	line-height: 1.5;
+}
+
+.history_entries .entry_details {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.history_entries .calendar_date {
+	border: #efefef 1px solid;
+	border-radius: 4px;
+	width: 48px;
+	text-align: center;
+}
+
+.history_entries .btn.btn-edit {
+	margin-left: .75em;
+	padding: 6px 10px;
+	border-color: transparent;
+}
+
+.calendar_date .entry_month {
+	background: red;
+	text-transform: uppercase;
+	padding: .25em;
+	font-weight: 600;
+	color: white;
+	font-size: .8em;
+}
+
+.calendar_date .entry_date {
+	padding: .2em;
+}

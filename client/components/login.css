@@ -1,0 +1,22 @@
+.form-signin {
+	max-width: 360px;
+	margin: auto;
+}
+
+.form-control {
+	position: relative;
+    height: auto;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+}
+
+input[type=password] {
+	margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.btn.btn-signin {
+	margin: 1em auto;
+}
