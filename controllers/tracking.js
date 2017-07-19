@@ -25,7 +25,7 @@ async function create(ctx, next) {
 			$push: {entries: entry}
 		})
 		let [createdEntry] = fromUser([entry], user)
-		ctx.body = {ok: true, entry: createdEntry}
+		return ctx.body = {ok: true, entry: createdEntry}
 	} 
 	catch (err) {
 		ctx.status = 500
@@ -59,6 +59,7 @@ async function read(ctx, next) {
 				// Order all entries by creation time
 				ctx.body.entries = orderBy(entries, ['createdAt'], ['desc'])
 			}
+			return ctx.body.entries
 		}
 	}
 	catch (err) {
@@ -91,7 +92,7 @@ async function update(ctx, next) {
 
 		let user = result.value
 		let [updatedEntry] = fromUser(user.entries.filter(item => item.slug == slug), user)
-		ctx.body = {ok: true, entry: updatedEntry}
+		return ctx.body = {ok: true, entry: updatedEntry}
 	} 
 	catch (err) {
 		ctx.status = 500
@@ -113,7 +114,7 @@ async function remove(ctx, next) {
 			{returnOriginal: false}
 		)
 		let user = result.value
-		ctx.body = {ok: true, entries: fromUser(user.entries, user)}
+		return ctx.body = {ok: true, entries: fromUser(user.entries, user)}
 	}
 	catch (err) {
 		ctx.status = 500
