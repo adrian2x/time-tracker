@@ -5,7 +5,6 @@ import moment from 'moment'
 import {Modal} from './Track'
 import store, {isToday, displayTimespan} from '../Store'
 
-store.loadEntries()
 
 @observer
 export default class History extends Component {
@@ -38,7 +37,7 @@ export default class History extends Component {
 									{entry.description} &nbsp;
 									<span className="label label-primary">{displayTimespan(entry)}</span>
 
-									{ isToday(entry.createdAt) &&
+									{ canEdit(entry, this.props.user) &&
 										<span>
 											<button type="button" className="btn btn-default btn-lg btn-edit"
 												data-toggle="modal" data-target={`#${entry.slug}`}>
@@ -65,4 +64,12 @@ export default class History extends Component {
 			</ul>
 		</div>
 	}
+
+	componentDidMount() {
+		store.loadEntries()
+	}
+}
+
+function canEdit(entry, user) {
+	return entry.user._id == user._id && isToday(entry.createdAt)
 }

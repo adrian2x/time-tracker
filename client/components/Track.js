@@ -20,27 +20,6 @@ export default class Track extends Component {
 	render() {
 		const {state, props} = this
 		return <div className="container tracker-ct">
-
-			{/*<div className="form-group">
-				<button type="button" className="btn btn-default btn-lg"
-					onClick={store.track}>
-					{store.isTracking ? 
-						<div>
-							<span className="glyphicon glyphicon-stop" aria-hidden="true"></span> Stop
-						</div> :
-						<div>
-							<span className="glyphicon glyphicon-play-circle" aria-hidden="true"></span> Start
-						</div>
-					}
-				</button>
-
-				{ store.elapsed && 
-					<span className="timer-elapsed">
-						{store.elapsed.hours()}:{store.elapsed.minutes()}:{store.elapsed.seconds()}
-					</span>
-				}
-			</div>*/}
-
 			<div className="form-group">
     			<label htmlFor="description">Description</label>
 				<input name="description" type="text" className="form-control" 
@@ -71,7 +50,7 @@ export default class Track extends Component {
 				</div>
 			</div>
 
-			<History mode="Today"></History>
+			<History {...props} mode="Today"></History>
 		</div>
 	}
 
@@ -144,7 +123,7 @@ export class Modal extends Component {
 							</button>
 						</span>
 						<button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="button" className="btn btn-primary" 
+						<button type="button" className="btn btn-primary" data-dismiss="modal"
 							onClick={this.save}>Save Changes</button>
 					</div>
 				</div>

@@ -3,12 +3,12 @@ import React from 'react'
 
 export default function Login() {
 	return <div className="container">
-      <form className="form-signin">
+      <form className="form-signin" method="POST">
         <h2 className="form-signin-heading">Please sign in</h2>
-        <label htmlFor="inputEmail" className="sr-only">Email address</label>
-        <input type="email" id="inputEmail" className="form-control" placeholder="Email address" required="" autoFocus="" />
-        <label htmlFor="inputPassword" className="sr-only">Password</label>
-        <input type="password" id="inputPassword" className="form-control" placeholder="Password" required="" />
+        <label htmlFor="username" className="sr-only">Username</label>
+        <input id="username" name="username" className="form-control" placeholder="Username" required="" autoFocus="" />
+        <label htmlFor="password" className="sr-only">Password</label>
+        <input type="password" id="password" name="password" className="form-control" placeholder="Password" required="" />
 
 		    <button className="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
 		

@@ -1,8 +1,10 @@
 const path = require('path')
 const webpack = require('webpack')
 
+const PRODUCTION = process.env.NODE_ENV == 'production'
+
 module.exports = {
-	entry: [
+	entry: PRODUCTION? ['./client/Router.js'] : [
 		'react-hot-loader/patch',
 		'webpack-dev-server/client?http://localhost:3001',
 		'webpack/hot/only-dev-server',
@@ -25,13 +27,15 @@ module.exports = {
 		]
 	},
 
-	plugins: [
+	plugins: PRODUCTION? [] : [
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.NamedModulesPlugin(),
 		new webpack.NoEmitOnErrorsPlugin(),
-	],
+	]
+}
 
-	devServer: {
+if (!PRODUCTION) {
+	module.exports.devServer = {
 		host: 'localhost',
 		port: 3001,
 		hot: true, // Tell the dev-server we're using HMR

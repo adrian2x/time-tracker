@@ -46,6 +46,8 @@ export default function Header(props) {
 								<img src={user.picture.data.url} alt={user.first_name}/>
 								<span className="caret"></span></a>
 							<ul className="dropdown-menu">
+								<li><Link to="/history">Signed in as <strong>{user.first_name}</strong></Link></li>
+								<li role="separator" className="divider"></li>
 								<li><Link to="/history">History</Link></li>
 								<li role="separator" className="divider"></li>
 								<li><a href="/bye">Log out</a></li>
