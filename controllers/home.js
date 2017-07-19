@@ -1,5 +1,5 @@
 const MongoClient = require('mongodb').MongoClient
-const client = MongoClient.connect(process.env.MONGO_URI)
+const client = MongoClient.connect(process.env.MONGODB_URI)
 
 module.exports = async function home(ctx, next) {
 	// Render page
