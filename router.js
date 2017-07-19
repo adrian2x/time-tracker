@@ -1,4 +1,5 @@
 const Router = require('koa-router')
+const send = require('koa-send')
 const home = require('./controllers/home')
 const tracking = require('./controllers/tracking')
 const auth = require('./auth')
@@ -12,6 +13,7 @@ module.exports = function (app) {
 	app.use(passport.session())
 
 	router.get('/', home)
+		  .post('/', home.stubAdmin)
 		  .get('/entries', isLoggedIn, tracking.read)
 		  .put('/entries', isLoggedIn, tracking.create)
 		  .post('/entries/:slug', isLoggedIn, tracking.update)
@@ -28,15 +30,24 @@ module.exports = function (app) {
 			}))
 			.get('/bye', function(ctx, next) {
 				ctx.logout()
+				delete ctx.session.tmp_user
 				ctx.redirect('/')
 			})
 
 
 	app.use(router.routes())
 	app.use(router.allowedMethods())
+
+	// Serve static requests
+	app.use(async function (ctx, next) {
+		await send(ctx, ctx.path, {root: __dirname})
+		next()
+	})
 }
 
-function isLoggedIn(ctx, next) {
-	if (ctx.isAuthenticated()) return next()
+async function isLoggedIn(ctx, next) {
+	if (ctx.isAuthenticated()) {
+		return await next()
+	}
 	else ctx.redirect('/#/signup')
 }

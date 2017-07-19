@@ -47,6 +47,18 @@ async function read(ctx, next) {
 				ok: true, 
 				entries: fromUser(user.entries, user)
 			}
+
+			if (user.role == 'admin') {
+				// Read entries from other users.
+				let otherUsers = await Users.find({_id: {$ne: user._id}}).toArray()
+				let entries = ctx.body.entries
+				for (let other of otherUsers) {
+					entries = entries.concat(fromUser(other.entries, other, true))
+				}
+
+				// Order all entries by creation time
+				ctx.body.entries = orderBy(entries, ['createdAt'], ['desc'])
+			}
 		}
 	}
 	catch (err) {
@@ -148,10 +160,12 @@ function validateEntry(date, description, hours, minutes) {
 	return entry
 }
 
-function fromUser(entries, user) {
+function fromUser(entries, user, disableSort) {
 	// Sort entries
-	entries = orderBy(entries, ['createdAt'], ['desc'])
-	// Add user data
+	if (disableSort == undefined) {
+		entries = orderBy(entries, ['createdAt'], ['desc'])
+	}
+	// Add user data to the entries to id owner
 	let {_id, first_name, timezone, picture} = user
 	return entries.map(entry => {
 		entry.user = {_id, first_name, timezone, picture}

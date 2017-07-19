@@ -8,6 +8,14 @@ const client = MongoClient.connect(process.env.MONGO_URL)
 
 module.exports = function(app) {
 
+	app.use(async function fakeAdmin(ctx, next) {
+		// Fake admin authentication
+		if (ctx.session.tmp_user) {
+			ctx.req.user = ctx.state.user = ctx.session.tmp_user
+		}
+		await next()
+	})
+
 	passport.serializeUser(function(user, done) {
 		done(null, user)
 	});
