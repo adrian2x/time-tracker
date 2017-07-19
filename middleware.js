@@ -10,11 +10,10 @@ const session = require('koa-generic-session')
 module.exports = function (app) {
 	app.keys = ['JamesBondIs007']
 	app.use(session(app))
-
-	// Allow CORS
-	app.use(cors())
-
-	app.use(bodyParser())
 	
-	app.use(templates(__dirname, { map: {html: 'ejs' }}))
+	app.use(cors()) // Allow CORS
+
+	app.use(bodyParser()) // Process payloads
+	
+	app.use(templates(__dirname, { map: {html: 'ejs' }})) // Render views
 }

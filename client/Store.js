@@ -3,13 +3,7 @@ import {observable, computed} from 'mobx'
 import request from './http'
 
 class Store {
-	// @observable isTracking = false
-
-	// @observable trackingStarted = null
-	// @observable trackingEnded = null
-	// @observable elapsed = null
-
-	@observable entries = []
+	@observable entries = [] // Collection of entries
 
 	@computed get totalTime() {
 		return entriesTotal(this.entries)
@@ -64,25 +58,6 @@ class Store {
 				}
 			})
 	}
-
-	// reset = () => {
-	// 	clearInterval(this._tracker)
-	// 	this.isTracking = false
-	// 	this.trackingEnded = this.trackingStarted = null
-	// }
-
-	// track = () => {
-	// 	if (this.isTracking) {
-	// 		return this.reset()
-	// 	}
-
-	// 	this.isTracking = true
-	// 	let started = moment()
-	// 	this.elapsed = null
-	// 	this._tracker = setInterval(() => {
-	// 		this.elapsed = moment.duration(moment().diff(started))
-	// 	}, 100)
-	// }
 }
 
 export default new Store()

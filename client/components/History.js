@@ -5,7 +5,6 @@ import moment from 'moment'
 import {Modal} from './Track'
 import store, {isToday, displayTimespan} from '../Store'
 
-
 @observer
 export default class History extends Component {
 	render() {

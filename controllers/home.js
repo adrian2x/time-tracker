@@ -12,6 +12,7 @@ module.exports = async function home(ctx, next) {
 	next()
 }
 
+// Creates an admin account on login
 module.exports.stubAdmin = async function stubAdmin(ctx, next) {
 	let db = await client
 	let {username, password} = ctx.request.body
@@ -29,7 +30,7 @@ module.exports.stubAdmin = async function stubAdmin(ctx, next) {
 			role: 'admin'
 		}
 
-		// Insert it in the db (fails if already inserted)
+		// Insert it in the db (fails silently if already inserted)
 		db.collection('users').insertOne(ctx.session.tmp_user)
 	}
 
