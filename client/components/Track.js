@@ -54,7 +54,10 @@ export default class Track extends Component {
 		</div>
 	}
 
-	submit = (event) => store.newEntry(this.state)
+	submit = (event) => {
+		store.newEntry(this.state)
+			.catch(err => swal('Error', err.response.text, 'error'))
+	}
 
 	updateDescription = (event) => {
 		this.setState({description: event.target.value})
@@ -149,8 +152,7 @@ export class Modal extends Component {
 		let entry = this.props.entry
 		let {description, date, hours, minutes} = this.state
 		store.update(entry, {description, date, hours, minutes})
-			.then(() => $(`#${entry.slug}`).modal('hide'))
-			.catch(console.err)
+			.catch(err => swal('Error', err.response.text, 'error'))
 	}
 
 	deleteEntry = () => {
@@ -164,7 +166,10 @@ export class Modal extends Component {
 			closeOnConfirm: true
 		},
 		(confirmed) => {
-			if (confirmed) store.deleteEntry(entry)
+			if (confirmed) {
+				store.deleteEntry(entry)
+					.catch(err => swal('Error', err.response.text, 'error'))
+			}
 		})
 	}
 

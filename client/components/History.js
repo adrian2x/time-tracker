@@ -23,7 +23,7 @@ export default class History extends Component {
 				<span className="label label-primary">{total.toFixed(2)}h</span> {mode}</h3>
 			}
 
-			{entries.length < 1 && <p className="empty_state">No items.</p>}
+			{entries.length < 1 && <p className="empty_state">(Your saved entries will show up here)</p>}
 
 			<ul className="list history_entries">
 				{entries.map((entry, i) => 
@@ -67,6 +67,7 @@ export default class History extends Component {
 
 	componentDidMount() {
 		store.loadEntries()
+			.catch(err => swal('Error', 'Your session is expired.', 'error'))
 	}
 }
 

@@ -29,7 +29,6 @@ class Store {
 					current.replace(entries)
 				}
 			})
-			.catch(err => swal('Error', 'Your session is expired.', 'error'))
 	}
 
 	newEntry = ({description, date, hours, minutes}) => {
@@ -42,7 +41,6 @@ class Store {
 					list.unshift(entry)
 				}
 			})
-			.catch(err => swal('Error', err.response.text, 'error'))
 	}
 
 	update = ({slug}, newEntry) => {
@@ -55,10 +53,6 @@ class Store {
 					return this.entries
 				}
 			})
-			.catch(err => {
-				swal('Error', err.response.text, 'error')
-				throw err
-			})
 	}
 
 	deleteEntry = (entry) => {
@@ -69,7 +63,6 @@ class Store {
 					this.entries.replace(entries)
 				}
 			})
-			.catch(err => swal('Error', err.response.text, 'error'))
 	}
 
 	// reset = () => {

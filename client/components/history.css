@@ -1,3 +1,16 @@
+.history-ct {
+	margin-top: 3em;
+}
+
+.history-ct .empty_state {
+	padding: 2em;
+	border: 2px solid #bdc3c7;
+	border-radius: 5px;
+	color: #7f8c8d;
+	font-size: 1.2em;
+	opacity: .75;
+}
+
 .history-ct.container[data-mode=Total] {
 	margin: auto;
 }
@@ -5,7 +18,7 @@
 .history_entries {
 	padding: 0;
 	list-style: none;
-	margin-top: 2em;
+	margin-top: 1em;
 }
 
 .history_entries li {
