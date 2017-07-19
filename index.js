@@ -8,7 +8,7 @@ require('./middleware')(app)
 require('./router')(app)
 
 // Starts the server
-app.listen(3000)
+app.listen(process.env.PORT)
 
 const webpack = require('webpack')
 const WebpackDevServer = require('webpack-dev-server')
