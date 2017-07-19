@@ -4,7 +4,7 @@ const orderBy = require('lodash/orderBy')
 const uuidv4 = require('uuid/v4')
 
 const MongoClient = require('mongodb').MongoClient
-const client = MongoClient.connect(process.env.MONGO_URL)
+const client = MongoClient.connect(process.env.MONGO_URI)
 
 module.exports = {create, read, update, remove}
 

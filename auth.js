@@ -4,7 +4,7 @@ const Facebook = require('passport-facebook').Strategy
 const Router = require('koa-router')
 
 const MongoClient = require('mongodb').MongoClient
-const client = MongoClient.connect(process.env.MONGO_URL)
+const client = MongoClient.connect(process.env.MONGO_URI)
 
 module.exports = function(app) {
 
