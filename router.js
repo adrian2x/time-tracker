@@ -1,7 +1,10 @@
 const Router = require('koa-router')
 const send = require('koa-send')
 const home = require('./controllers/home')
-const tracking = require('./controllers/tracking')
+const createEntry = require('./controllers/api/createEntry')
+const readEntries = require('./controllers/api/readEntries')
+const updateEntry = require('./controllers/api/updateEntry')
+const deleteEntry = require('./controllers/api/deleteEntry')
 const auth = require('./auth')
 
 const router = new Router()
@@ -14,10 +17,10 @@ module.exports = function (app) {
 
 	router.get('/', home)
 		  .post('/', home.stubAdmin)
-		  .get('/entries', isLoggedIn, tracking.read)
-		  .put('/entries', isLoggedIn, tracking.create)
-		  .post('/entries/:slug', isLoggedIn, tracking.update)
-		  .delete('/entries/:slug', isLoggedIn, tracking.remove)
+		  .get('/entries', isLoggedIn, readEntries)
+		  .put('/entries', isLoggedIn, createEntry)
+		  .post('/entries/:slug', isLoggedIn, updateEntry)
+		  .delete('/entries/:slug', isLoggedIn, deleteEntry)
 		  .get('/fb', passport.authenticate('facebook', {
 				scope: [
 					'public_profile',
