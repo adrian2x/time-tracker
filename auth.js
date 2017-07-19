@@ -45,8 +45,8 @@ module.exports = function(app) {
 
 	// TODO: change these credentials
   passport.use(new Facebook({
-			clientID: '149531775391525',
-			clientSecret: '276d9bbc056bb37a62b0969e036a9d9e',
+			clientID: process.env.FACEBOOK_CLIENT,
+			clientSecret: process.env.FACEBOOK_SECRET,
 			enableProof: true,
 			profileFields: [
 				'id',
