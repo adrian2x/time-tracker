@@ -31,7 +31,7 @@ export default class Track extends Component {
 				<div className="col-xs-4 col-md-3">
 					<label htmlFor="date">Date</label>
 					<input name="date" type="text" className="form-control" 
-						onChange={this.updateDate} placeholder="Date"/>
+						ref={node => this._datepicker = node} placeholder="Date" />
 				</div>
 				<div className="col-xs-4 col-md-3">
 					<label htmlFor="hours">Hours</label>
@@ -72,6 +72,12 @@ export default class Track extends Component {
 		this.setState({minutes: event.target.value})
 	}
 	
+	componentDidMount() {
+		$(this._datepicker).datepicker({endDate: new Date()})
+			.on('changeDate', event => {
+				this.setState({date: event.date})
+			})
+	}
 }
 
 
@@ -100,8 +106,7 @@ export class Modal extends Component {
 						<div className="row">
 							<div className="col-xs-4">
 								<input name="date_updated" type="text" className="form-control" 
-									defaultValue={entry.date} placeholder="Date"
-									onChange={this.updateDate} />
+									ref={node => this._datepicker = node} placeholder="Date" />
 							</div>
 							<div className="col-xs-4">
 								<input name="hours_updated" type="number" step=".01" className="form-control" 
@@ -131,6 +136,15 @@ export class Modal extends Component {
 		</div>
 	}
 
+	componentDidMount() {
+		// Init datepicker
+		$(this._datepicker).datepicker({endDate: new Date()})
+		.datepicker('update', this.state.date)
+			.on('changeDate', event => {
+				this.setState({date: event.date})
+			})
+	}
+
 	save = () => {
 		let entry = this.props.entry
 		let {description, date, hours, minutes} = this.state
@@ -156,10 +170,6 @@ export class Modal extends Component {
 
 	updateDescription = (event) => {
 		this.setState({description: event.target.value})
-	}
-
-	updateDate = (event) => {
-		this.setState({date: event.target.value})
 	}
 
 	updateHours = (event) => {
